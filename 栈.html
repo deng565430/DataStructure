@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>栈</title>
+</head>
+<body>
+  <script>
+    /*
+      概念和用途
+      1、 特殊的列表
+      2、 高效的数据结构， 因为数据只能在栈顶删除或增加，操作很快
+      3、栈的使用遍布程序语言实现的方方面面，从表达式求值到处理函数调用
+
+      定义
+      1、只能通过列表的一端访问， 这一端称为栈顶（反之栈底）
+      2、栈被称为一种后入先出（LIFO， last-in-first-out）的数据结构
+      3、插入新元素又称作进栈、入栈或压栈，从一个栈删除元素又称作出栈或退栈
+
+    */
+
+    function Stack() {
+      this.dataStore = []; // 保存栈内元素
+      this.top = 0; // 标记可以插入新元素的位置 栈内亚入元素该变量变大 弹出元素变量减小
+      this.push = push; // 入栈操作
+      this.pop = pop; // 出栈操作
+      this.peek = peek; // 返回栈顶元素
+      this.clear = clear; // 清空栈
+      this.length = length; // 栈的长度
+    }
+
+    // 向栈中压入元素 同时让指针top+1 一定注意++
+    function push(element) {
+      this.dataStore[this.top++] = element;
+    }
+
+    // 出栈操作 同时将top - 1
+    function pop() {
+      return this.dataStore[--this.top];
+    }
+
+    // 返回栈顶元素， 变量top值减1 返回不删除
+    function peek() {
+      return this.dataStore[this.top - 1];
+    }
+
+    // 返回栈内元素的元素个数
+    function length() {
+      return this.top;
+    }
+
+    // 清空一个栈
+    function clear() {
+      this.top = 0;
+    }
+
+    var s = new Stack();
+    s.push('小红第一');
+    s.push('小李第二');
+    s.push('小方第三');
+    s.push('小章第四');
+    s.push('小明第五');
+    console.log('栈的长度', s.length());
+    console.log('栈顶', s.peek());
+    console.warn('出栈', s.pop());
+    console.warn('出栈', s.pop());
+    console.warn('出栈', s.pop());
+
+
+    /*
+      ================ 回文算法Dad 1001 racecar ===============
+
+    */
+
+    function isPalindrome(word) {
+      var s = new Stack();
+      for(var i = 0; i < word.length; i++) {
+        s.push(word[i]);
+      }
+      var rword = '';
+      console.log(s);
+      while(s.length() > 0) {
+        rword += s.pop();
+      }
+      console.log(rword);
+      if (rword === word) {
+        return true;
+      } else {
+        return false
+      }
+    }
+
+    var word = 'racecar';
+    var a = isPalindrome(word);
+    console.log(a);
+  </script>
+</body>
+</html>

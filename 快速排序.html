@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>快速排序</title>
+</head>
+<body>
+  <script>
+  /*
+    在列表中选择一个恶元素作为基准值， 比它小的放左边， 大的房右边
+
+   */
+
+   function qSort(list) {
+     if (list.length === 0) {
+       return [];
+     }
+     var pivot = list[0];
+     var lesser = [];
+     var greater = [];
+     for (var i = 1; i < list.length; i++) {
+       if (list[i] < pivot) {
+         lesser.push(list[i]);
+       } else {
+         greater.push(list[i]);
+       }
+     }
+     return qSort(lesser).concat(pivot, qSort(greater))
+   }
+
+  var arr = [10, 11, 23, 55, 78, 32, 1, 46, 75, 7];
+  console.log(qSort(arr));
+  </script>
+</body>
+</html>

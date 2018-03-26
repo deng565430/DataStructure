@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>贪心算法</title>
+</head>
+<body>
+  <script>
+  /*
+    贪心算法的找零问题： 50块、 10块、 5块、1块
+   */
+
+  function makeChange(orginRmb, coins) {
+    var remianRmb = 0;
+    if (orginRmb % 50 < orginRmb) {
+      coins[3] = parseInt(orginRmb % 50, 10);
+      remianRmb = orginRmb % 50;
+      orginRmb = remianRmb;
+    }
+
+    if (orginRmb % 10 < orginRmb) {
+      coins[2] = parseInt(orginRmb % 10, 10);
+      remianRmb = orginRmb % 10;
+      orginRmb = remianRmb;
+    }
+
+    if (orginRmb % 5 < orginRmb) {
+      coins[1] = parseInt(orginRmb % 5, 10);
+      remianRmb = orginRmb % 5;
+      orginRmb = remianRmb;
+    }
+
+    coins[0] = orginRmb % 1;
+  }
+
+  var orginRmb = 63;
+  var coins = [];
+  makeChange(orginRmb, coins)
+  if (coins[3] > 0) {
+    console.log('继续使用10块钱找零');
+  }
+  if (coins[2] > 0) {
+    console.log('继续使用5块钱找零');
+  }
+  if (coins[1] > 0) {
+    console.log('继续使用1块钱找零');
+  }
+
+  if (coins[0] == 0) {
+    console.log('找完了');
+  }
+  </script>
+</body>
+</html>

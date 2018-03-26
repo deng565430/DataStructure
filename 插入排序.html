@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>插入排序</title>
+</head>
+<body>
+  <script>
+  /*
+    按数字或字母顺序对数据进行排序， 后面的要为前面的腾出位置
+
+   */
+
+    var CArray = function () {
+      this.dataStore = [10, 11, 23, 55, 78, 32, 1, 46, 75, 7];
+      this.insertSort = insertSort;
+    }
+    function insertSort() {
+      var temp, inner;
+      for(var i = 1; i < this.dataStore.length; i++) {
+        temp = this.dataStore[i];
+        inner = i;
+        while (inner > 0 && (this.dataStore[inner -1] >= temp)) {
+          this.dataStore[inner] = this.dataStore[inner - 1];
+          console.log('内部数据', this.dataStore);
+          inner--;
+        }
+        this.dataStore[inner] = temp
+        console.log('数据', this.dataStore);
+      }
+    }
+
+    var mynums = new CArray();
+    mynums.insertSort(mynums);
+    console.log(mynums.dataStore);
+  </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>散列</title>
+</head>
+<body>
+  <script>
+    function HashTable(params) {
+      this.table = new Array(137);
+      this.simpleHash = simpleHash;
+      this.betterHash = betterHash;
+      this.showDistro = showDistro;
+      this.put = put;
+      this.get = get;
+      this.buildChians = buildChians;
+    }
+
+    // 解决碰撞
+    function buildChians(data) {
+      for (var i = 0; i < data.length; i++) {
+        this.table[i] = new Array();
+      }
+    }
+
+    function simpleHash(data) {
+      var total = 0;
+      for(var i = 0; i < data.length; i++) {
+        total += data.charCodeAt(i);
+      }
+      return total % this.table.length;
+    }
+
+    function betterHash(data) {
+      var H = 31;
+      var total = 0;
+      for(var i = 0; i < data.length; i++) {
+        total += H * total + data.charCodeAt(i);
+      }
+      if (total < 0) {
+        total += this.table.length - 1;
+      }
+      return total % this.table.length;
+    }
+
+    function put(data) {
+      var pos = this.betterHash(data);
+      var index = 0;
+      if (this.table[pos][index] == undefined) {
+        this.table[pos][index] = data;
+        index ++;
+      } else {
+        while (this.table[pos][index] != undefined) {
+          ++index;
+        }
+        this.table[pos][index] = data;
+      }
+      this.table[pos] = data;
+    }
+
+    function get(data) {
+      return this.table[this.simpleHash(data)];
+    }
+
+    function showDistro(data) {
+      var n = 0;
+      for(var i = 0; i < this.table.length; i++) {
+        if (this.table[i][0] !== undefined) {
+          console.log('键值是 -》 ' +i+ '值是【'+this.table[i]+'】');
+        }
+      }
+    }
+
+    var hTable = new HashTable();
+    hTable.buildChians();
+    hTable.put('china');
+    hTable.put('japan');
+    hTable.put('america');
+    hTable.put('nicha');
+    /* hTable.put('75654');
+    hTable.put('34634');
+    hTable.put('75753');
+    hTable.put('23424'); */
+
+    hTable.showDistro()
+  </script>
+</body>
+</html>
